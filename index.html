@@ -1,1 +1,1636 @@
-123
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Портфолио — Максим Слепченков</title>
+
+<style>
+  :root{
+    --bg:#f4f6fa;
+    --card:#ffffff;
+    --text:#0b1220;
+    --muted:#4b5563;
+    --border:#e5e7eb;
+
+    --brand:#0b3a82;
+    --brand2:#0f4aa0;
+
+    --shadow:0 10px 28px rgba(15,23,42,.08);
+    --shadow2:0 4px 12px rgba(15,23,42,.06);
+
+    --radius:16px;
+  }
+
+  *{ box-sizing:border-box; }
+  html, body{ height:100%; }
+
+  body{
+    margin:0;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 18%, var(--bg) 100%);
+    color:var(--text);
+    overflow-x:hidden; /* ✅ чтобы на телефоне не было горизонтального скролла */
+  }
+
+  .container{
+    max-width:1100px;
+    margin:0 auto;
+    padding:24px 16px 64px;
+  }
+
+  .top{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    box-shadow:var(--shadow2);
+    padding:18px 18px;
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    justify-content:space-between;
+    flex-wrap:wrap;
+  }
+  .kicker{
+    font-size:12px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--muted);
+    font-weight:800;
+  }
+  .name{
+    margin:6px 0 0;
+    font-size:26px;
+    font-weight:950;
+    line-height:1.12;
+  }
+
+  .tabs-wrap{
+    position:sticky;
+    top:0;
+    z-index:20;
+    margin:14px 0 18px;
+    padding:10px 0;
+    background:linear-gradient(180deg, rgba(244,246,250,0.92) 0%, rgba(244,246,250,0.72) 70%, rgba(244,246,250,0) 100%);
+    backdrop-filter: blur(10px);
+  }
+
+  .tabs{
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(3, minmax(0, 1fr));
+    gap:8px;
+    padding:8px;
+    border-radius:18px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.78);
+    box-shadow:var(--shadow2);
+  }
+  .tab{
+    border:0;
+    cursor:pointer;
+    padding:12px 12px;
+    border-radius:999px;
+    font-weight:950;
+    color:#1f2937;
+    background:transparent;
+    transition:.15s ease-in-out;
+    outline:none;
+    width:100%;
+    text-align:center;
+    white-space:nowrap;
+  }
+  .tab:hover{ background:rgba(15,74,160,.06); }
+  .tab.active{
+    background: linear-gradient(180deg, var(--brand2), var(--brand));
+    color:#fff;
+    box-shadow: 0 10px 20px rgba(11,58,130,.18);
+  }
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:18px 18px;
+    margin-bottom:14px;
+  }
+  .card h2{
+    margin:0 0 10px;
+    font-size:18px;
+    font-weight:950;
+    letter-spacing:.01em;
+  }
+  .muted{
+    margin:0;
+    color:var(--muted);
+    line-height:1.6;
+    font-size:14px;
+  }
+
+  .case-grid{
+    display:grid;
+    grid-template-columns:repeat(12, 1fr);
+    gap:12px;
+    margin-top:12px;
+  }
+  .case-item{
+    grid-column: span 12;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background: linear-gradient(180deg, #ffffff 0%, #fbfcff 100%);
+    box-shadow:var(--shadow2);
+    padding:14px 14px;
+  }
+  .case-title{
+    margin:0 0 10px;
+    font-size:14px;
+    font-weight:950;
+  }
+
+  .kv{
+    display:grid;
+    grid-template-columns: 140px 1fr;
+    gap:8px 12px;
+    margin-top:10px;
+  }
+  .label{
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#6b7280;
+    font-weight:900;
+    padding-top:2px;
+  }
+  .value{
+    font-size:13px;
+    line-height:1.45;
+    color:#111827;
+  }
+  .list{
+    margin:8px 0 0 16px;
+    padding:0;
+  }
+  .list li{
+    margin:6px 0;
+    font-size:13px;
+    line-height:1.45;
+    color:#111827;
+  }
+
+  .kpi{
+    margin-top:12px;
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:10px;
+  }
+  .kpi-item{
+    border:1px solid var(--border);
+    border-radius:12px;
+    background:#fff;
+    box-shadow:var(--shadow2);
+    padding:10px 10px;
+  }
+  .kpi-item .k{
+    font-size:11px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:#6b7280;
+    font-weight:900;
+    margin:0 0 6px;
+  }
+  .kpi-item .v{
+    margin:0;
+    font-size:14px;
+    font-weight:950;
+    color:#111827;
+  }
+
+  .chart-box{
+    margin-top:12px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    background:#fff;
+    box-shadow:var(--shadow2);
+    padding:12px 12px;
+    overflow:hidden;
+  }
+  .chart-title{
+    margin:0 0 10px;
+    font-weight:950;
+    font-size:13px;
+    color:#111827;
+  }
+  canvas{
+    display:block;
+    width:100%;
+    max-width:100%;
+    height:auto; /* ✅ адаптивность */
+  }
+
+  .project-panel{ display:none; }
+  .project-panel.active{ display:block; }
+
+  @media (max-width: 980px){
+    .tabs{ grid-template-columns:repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 520px){
+    .tabs{ grid-template-columns:1fr; } /* ✅ на маленьких телефонах без “двоения” */
+  }
+  @media (max-width: 880px){
+    .kpi{ grid-template-columns:repeat(3, 1fr); }
+  }
+  @media (max-width: 760px){
+    .container{ padding:18px 12px 48px; }
+    .name{ font-size:22px; }
+    .tabs{ border-radius:16px; padding:6px; }
+    .tab{ padding:10px 10px; border-radius:14px; }
+    .card{ padding:14px 14px; border-radius:16px; }
+    .kv{ grid-template-columns: 1fr; }
+    .label{ padding-top:0; }
+    .kpi{ grid-template-columns:repeat(2, 1fr); }
+  }
+</style>
+</head>
+
+<body>
+<div class="container">
+
+  <div class="top">
+    <div>
+      <div class="kicker">Портфолио</div>
+      <div class="name">Максим Слепченков</div>
+    </div>
+  </div>
+
+  <div class="tabs-wrap">
+    <div class="tabs" role="tablist" aria-label="Проекты">
+      <button class="tab active" data-project="p-3logic" onclick="openProject(this)" role="tab" aria-selected="true">3Logic Group</button>
+      <button class="tab" data-project="p-graviton" onclick="openProject(this)" role="tab" aria-selected="false">Гравитон</button>
+      <button class="tab" data-project="p-robort" onclick="openProject(this)" role="tab" aria-selected="false">Robort</button>
+      <button class="tab" data-project="p-robosobaka" onclick="openProject(this)" role="tab" aria-selected="false">Robosobaka</button>
+      <button class="tab" data-project="p-chilkoot" onclick="openProject(this)" role="tab" aria-selected="false">Chilkoot</button>
+      <button class="tab" data-project="p-raskat" onclick="openProject(this)" role="tab" aria-selected="false">Raskat</button>
+      <button class="tab" data-project="p-crusader" onclick="openProject(this)" role="tab" aria-selected="false">Crusader</button>
+    </div>
+  </div>
+
+  <!-- ================= PROJECT: 3LOGIC ================= -->
+  <div id="p-3logic" class="project-panel active">
+
+    <div class="card">
+      <h2>О компании</h2>
+      <p class="muted">
+        <strong>3Logic Group</strong> — российский ИТ-холдинг и дистрибьютор компьютерных комплектующих, серверного оборудования
+        и IT-решений для бизнеса. Развивает B2B-направление и собственные торговые марки.
+      </p>
+      <p class="muted" style="margin-top:10px;"><strong>Сайт:</strong> 3logic.ru</p>
+    </div>
+
+    <div class="card">
+      <h2>Роль в проекте</h2>
+      <p class="muted">
+        Руководил digital-направлением: стратегия и KPI, бюджеты, постановка задач, контроль сроков и качества,
+        координация подрядчиков и внутренней команды. Отвечал за результат по performance, SEO и email-каналу.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Инструменты и аналитика</h2>
+      <p class="muted">
+        Яндекс Директ, Яндекс Метрика, Яндекс Вебмастер, Google Analytics, Google Search Console,
+        Unisender, Figma, Power BI, Roistat
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Email-маркетинг</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: рост продаж через email</p>
+
+          <div class="kv">
+            <div class="label">Задача</div>
+            <div class="value">Увеличить продажи из email-канала, реактивировать «спящих» клиентов и повысить вовлечённость базы.</div>
+
+            <div class="label">Период</div>
+            <div class="value">Ноябрь — декабрь 2025</div>
+
+            <div class="label">Команда</div>
+            <div class="value">
+              In-house: дизайнер.<br>
+              Подрядчик: email-маркетолог.<br>
+              Курировал подготовку и запуск рассылок.
+            </div>
+
+            <div class="label">Решение</div>
+            <div class="value">
+              <ul class="list">
+                <li>Сегментировал базу, выделил приоритетные группы (активные / «спящие» / новые).</li>
+                <li>Собрал логику цепочек писем под сегменты (реактивация, прогрев, офферы).</li>
+                <li>Согласовал макеты и контент, контролировал подготовку и отправки.</li>
+                <li>Оптимизировал тайминг отправок и темы писем по отклику.</li>
+                <li>Подготовил анализ результатов по лидам и продажам.</li>
+              </ul>
+            </div>
+
+            <div class="label">Результат</div>
+            <div class="value">
+              Проведено <strong>6 рассылок</strong>, получено <strong>43 лида</strong> и <strong>10 продаж</strong>. <strong>ROI — 996%</strong>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>SEO</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: рост органического трафика</p>
+
+          <div class="kv">
+            <div class="label">Задача</div>
+            <div class="value">Увеличить органический трафик и закрепиться в ТОП-10 по приоритетным кластерам.</div>
+
+            <div class="label">Период</div>
+            <div class="value">Июль 2024 — апрель 2025</div>
+
+            <div class="label">Команда</div>
+            <div class="value">
+              In-house: контент-менеджер, junior email-маркетолог.<br>
+              Подрядчик: SEO-агентство.<br>
+              Координировал работы и принимал внедрения.
+            </div>
+
+            <div class="label">Решение</div>
+            <div class="value">
+              <ul class="list">
+                <li>Сформировал план приоритетных технических доработок и контроль внедрений.</li>
+                <li>Организовал on-page оптимизацию: структура, meta, перелинковка.</li>
+                <li>Доработал контент целевых страниц под коммерческие запросы.</li>
+                <li>Ввёл регулярный контроль динамики и корректировку плана работ.</li>
+              </ul>
+            </div>
+
+            <div class="label">Результат</div>
+            <div class="value">Органический трафик вырос на <strong>+53%</strong> (в относительном выражении).</div>
+          </div>
+
+          <div class="chart-box">
+            <p class="chart-title">Динамика органического трафика (июль 2024 → апрель 2025), %</p>
+            <canvas id="chartTraffic3logic" height="220"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Контекстная реклама</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: запуск и оптимизация контекстной рекламы</p>
+
+          <div class="kv">
+            <div class="label">Задача</div>
+            <div class="value">
+              Повысить эффективность контекстной рекламы, вывести кампании на уровень ROI не ниже 300%
+              и обеспечить стабильную окупаемость канала.
+            </div>
+
+            <div class="label">Период</div>
+            <div class="value">Июль — декабрь 2024</div>
+
+            <div class="label">Команда</div>
+            <div class="value">
+              In-house: junior интернет-маркетолог.<br>
+              Подрядчик: performance-агентство (контекстная реклама).<br>
+              Отвечал за приоритизацию задач и контроль KPI.
+            </div>
+
+            <div class="label">Решение</div>
+            <div class="value">
+              <ul class="list">
+                <li>Проанализировал текущие кампании и выявил точки потерь в структуре аккаунта и распределении бюджета.</li>
+                <li>Собрал и кластеризовал семантику по коммерческим и товарным запросам.</li>
+                <li>Сформировал ТЗ подрядчику, согласовал план работ и контролировал сроки/качество внедрений.</li>
+                <li>Запустил и структурировал кампании на поиске, в РСЯ и ретаргетинге.</li>
+                <li>Организовал внедрение минус-фраз и регулярную чистку нерелевантных запросов/площадок.</li>
+                <li>Координировал оптимизацию объявлений и ставок, перераспределение бюджета в пользу наиболее окупаемых связок.</li>
+              </ul>
+            </div>
+
+            <div class="label">Результат</div>
+            <div class="value">
+              CPC снижен на <strong>40%</strong>, ROI рекламных кампаний превысил <strong>700%</strong>.
+              Канал выведен в стабильную окупаемость и обеспечил устойчивый вклад в продажи компании.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= PROJECT: GRAVITON ================= -->
+  <div id="p-graviton" class="project-panel">
+
+    <div class="card">
+      <h2>О компании</h2>
+      <p class="muted">
+        <strong>«Гравитон»</strong> — российский разработчик и производитель вычислительной техники, серверов и инфраструктурных решений для бизнеса и госсектора.
+      </p>
+      <p class="muted" style="margin-top:10px;"><strong>Сайт:</strong> graviton.ru</p>
+    </div>
+
+    <div class="card">
+      <h2>Роль в проекте</h2>
+      <p class="muted">
+        Выстроил SEO-направление: сформировал стратегию, KPI и план внедрений, ставил задачи подрядчику и внутренним исполнителям,
+        контролировал сроки и качество работ. Настроил регулярную отчётность по трафику и видимости, корректировал план по результатам.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Инструменты и аналитика</h2>
+      <p class="muted">
+        Яндекс Директ, Яндекс Метрика, Яндекс Вебмастер, Google Analytics, Google Search Console,
+        Figma, Power BI, Roistat
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>SEO</h2>
+
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: рост SEO-трафика и видимости в ТОП-10</p>
+
+          <div class="kv">
+            <div class="label">Цель</div>
+            <div class="value">Увеличить органический трафик и долю запросов в ТОП-10 (Яндекс/Google) по приоритетным B2B-кластерам.</div>
+
+            <div class="label">Период</div>
+            <div class="value">Октябрь 2024 — декабрь 2025</div>
+
+            <div class="label">Команда</div>
+            <div class="value">
+              In-house: junior интернет-маркетолог, контент-менеджер.<br>
+              Подрядчик: SEO-агентство.<br>
+              Курировал стратегию, постановку задач, внедрения и контроль KPI.
+            </div>
+
+            <div class="label">Решение</div>
+            <div class="value">
+              <ul class="list">
+                <li>Собрал кластеры запросов и приоритетные страницы роста.</li>
+                <li>Организовал технические внедрения: индексация, структура, скорость, ошибки.</li>
+                <li>Внедрил on-page оптимизацию: meta, заголовки, перелинковка, контент-блоки.</li>
+                <li>Настроил регулярный мониторинг видимости/трафика и корректировки плана.</li>
+              </ul>
+            </div>
+
+            <div class="label">Результат</div>
+            <div class="value">
+              Органический трафик вырос на <strong>+42%</strong>. Видимость в ТОП-10 в Яндекс увеличилась с <strong>3%</strong> до <strong>59,5%</strong>,
+              а в Google — с <strong>4%</strong> до <strong>80%</strong>.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-box">
+        <p class="chart-title">SEO-трафик: динамика, % (окт 2024 → дек 2025)</p>
+        <canvas id="chartTrafficGraviton" height="220"></canvas>
+      </div>
+
+      <div class="chart-box">
+        <p class="chart-title">Видимость ТОП-10 Яндекс: динамика, % (ноябрь 2024 → дек 2025)</p>
+        <canvas id="chartYandexGraviton" height="220"></canvas>
+      </div>
+
+      <div class="chart-box">
+        <p class="chart-title">Видимость ТОП-10 Google: динамика, % (ноябрь 2024 → дек 2025)</p>
+        <canvas id="chartGoogleGraviton" height="220"></canvas>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= PROJECT: ROBORT ================= -->
+  <div id="p-robort" class="project-panel">
+
+    <div class="card">
+      <h2>О компании</h2>
+      <p class="muted">
+        <strong>Robort</strong> — российский поставщик и интегратор робототехнических и автоматизированных решений для бизнеса и промышленности. Компания занимается поставкой, внедрением и сопровождением промышленных роботов, систем автоматизации и роботизированных комплексов для производственных предприятий.
+      </p>
+      <p class="muted" style="margin-top:10px;"><strong>Сайт:</strong> robort.ru</p>
+    </div>
+
+    <div class="card">
+      <h2>Роль в проекте</h2>
+      <p class="muted">
+        Руководил performance- и SEO-направлением: формировал цели и KPI, приоритизировал задачи, координировал работу подрядчиков и внутренней команды,
+        отвечал за эффективность каналов и качество лидов.
+      </p>
+      <p class="muted" style="margin-top:10px;">
+        Выстроил связку <strong>маркетинг → продажи → обработка лидов → сделки</strong>.
+        Совместно с отделом продаж оптимизировал качество заявок: регулярные проверки обработки лидов и разборы по потерям в воронке.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Инструменты и аналитика</h2>
+      <p class="muted">
+        Яндекс Директ, Яндекс Метрика, Яндекс Вебмастер, Google Analytics, Google Search Console,
+        Figma, Power BI, Roistat
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Контекстная реклама</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: системный лидогенератор через контекстную рекламу</p>
+
+          <div class="kv">
+            <div class="label">Цель</div>
+            <div class="value">Держать CPL не выше <strong>8 000 ₽</strong> и повышать качество входящих B2B-заявок.</div>
+
+            <div class="label">Период</div>
+            <div class="value">Июнь — декабрь 2025</div>
+
+            <div class="label">Команда</div>
+            <div class="value">
+              In-house: junior интернет-маркетолог.<br>
+              Подрядчик: performance-агентство (контекстная реклама).<br>
+              Курировал стратегию, постановку задач и контроль KPI.
+            </div>
+
+            <div class="label">Решение</div>
+            <div class="value">
+              <ul class="list">
+                <li>Собрал и кластеризовал семантику под коммерческие B2B-запросы.</li>
+                <li>Настроил кампании на поиске, в РСЯ и ретаргетинг с раздельной логикой оптимизации.</li>
+                <li>Вёл регулярную минусацию и чистку запросов/площадок.</li>
+                <li>Запустил цикл контроля качества лидов с продажами: проверки обработки и корректировки.</li>
+                <li>Вёл регулярную отчётность и план работ.</li>
+              </ul>
+            </div>
+
+            <div class="label">Результат</div>
+            <div class="value">Достигнута управляемая стоимость лида и стабильный поток обращений. KPI за период:</div>
+          </div>
+
+          <div class="kpi">
+            <div class="kpi-item"><p class="k">Количество лидов</p><p class="v">202</p></div>
+            <div class="kpi-item"><p class="k">CPL</p><p class="v">5 367 ₽</p></div>
+            <div class="kpi-item"><p class="k">CR</p><p class="v">0,34%</p></div>
+            <div class="kpi-item"><p class="k">CTR</p><p class="v">1,10%</p></div>
+            <div class="kpi-item"><p class="k">CPC</p><p class="v">18 ₽</p></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>SEO</h2>
+
+      <div class="chart-box">
+        <p class="chart-title">Видимость ТОП-10 Яндекс: динамика, % (апр 2025 → дек 2025)</p>
+        <canvas id="chartYandexRobort" height="220"></canvas>
+      </div>
+
+      <div class="chart-box">
+        <p class="chart-title">Видимость ТОП-10 Google: динамика, % (апр 2025 → дек 2025)</p>
+        <canvas id="chartGoogleRobort" height="220"></canvas>
+      </div>
+
+      <div class="chart-box">
+        <p class="chart-title">Лиды из органического канала: динамика, шт (апр 2025 → дек 2025)</p>
+        <canvas id="chartLeadsRobort" height="220"></canvas>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Контент-маркетинг</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: рост SEO-трафика и лидов через информационные статьи</p>
+
+          <div class="kv">
+            <div class="label">Задача</div>
+            <div class="value">
+              Увеличить SEO-трафик за счёт информационного контента и конвертировать аудиторию в лиды через связку:
+              статьи → коммерческие страницы → заявки.
+            </div>
+
+            <div class="label">Период</div>
+            <div class="value">Сентябрь 2025 — декабрь 2025</div>
+
+            <div class="label">Команда</div>
+            <div class="value">
+              In-house: копирайтер.<br>
+              Подрядчик: SEO-агентство (контент-план, ТЗ и SEO-требования).<br>
+              Курировал постановку задач и приемку материалов.
+            </div>
+
+            <div class="label">Решение</div>
+            <div class="value">
+              <ul class="list">
+                <li>Сформировал контент-план под вопросы аудитории и кластеры семантики.</li>
+                <li>Организовал перелинковку статей на коммерческие страницы.</li>
+                <li>Настроил регулярный контроль и корректировку тем по динамике трафика и лидов.</li>
+              </ul>
+            </div>
+
+            <div class="label">Результат</div>
+            <div class="value">
+              Доля трафика на информационные статьи составила <strong>~7% от всего SEO-трафика</strong>.
+              С информационных статей получали <strong>~10 лидов в месяц</strong>.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= PROJECT: ROBOSOBAKA ================= -->
+  <div id="p-robosobaka" class="project-panel">
+
+    <div class="card">
+      <h2>О компании</h2>
+      <p class="muted">
+        <strong>Robosobaka</strong> — компания, занимающаяся разработкой, поставкой и внедрением роботизированных и интерактивных решений для бизнеса и образовательных проектов.
+      </p>
+      <p class="muted" style="margin-top:10px;"><strong>Сайт:</strong> robosobaka.ru</p>
+    </div>
+
+    <div class="card">
+      <h2>Роль в проекте</h2>
+      <p class="muted">
+        Отвечал за performance- и SEO-направление: сформировал цели и KPI, организовал работу с подрядчиками,
+        контролировал внедрения и оптимизацию. Вёл регулярную отчётность по эффективности (CPL/конверсии/качество обращений)
+        и вместе с продажами отслеживал качество обработки лидов.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Инструменты и аналитика</h2>
+      <p class="muted">
+        Яндекс Директ, Яндекс Метрика, Яндекс Вебмастер, Google Analytics, Google Search Console,
+        Figma, Power BI, Roistat
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Контекстная реклама</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: снижение CPL и рост объёма обращений</p>
+
+          <div class="kv">
+            <div class="label">Цель</div>
+            <div class="value">Снизить стоимость лида и обеспечить стабильный поток конверсий из контекста.</div>
+
+            <div class="label">Период</div>
+            <div class="value">Июль — декабрь 2024</div>
+
+            <div class="label">Команда</div>
+            <div class="value">
+              In-house: junior интернет-маркетолог.<br>
+              Подрядчик: performance-агентство (контекстная реклама).<br>
+              Курировал стратегию, постановку задач и контроль KPI.
+            </div>
+
+            <div class="label">Решение</div>
+            <div class="value">
+              <ul class="list">
+                <li>Пересобрал структуру аккаунта и разделил кампании по целям (поиск / РСЯ / ретаргетинг).</li>
+                <li>Кластеризовал семантику и усилил минусацию для снижения нецелевых кликов.</li>
+                <li>Обновил объявления и посадочные сценарии под коммерческие запросы.</li>
+                <li>Запустил регулярный контроль запросов/площадок и корректировки ставок.</li>
+                <li>Вёл недельную отчётность и план оптимизаций.</li>
+              </ul>
+            </div>
+
+            <div class="label">Результат</div>
+            <div class="value">CPL стабилизирован на уровне <strong>~3 800–5 900 ₽</strong> при росте количества конверсий.</div>
+          </div>
+
+          <div class="chart-box">
+            <p class="chart-title">CPL: динамика, ₽ (июль 2024 → декабрь 2024)</p>
+            <canvas id="chartCplRobosobaka" height="220"></canvas>
+          </div>
+
+          <div class="chart-box">
+            <p class="chart-title">Конверсии (обращения): динамика, шт (июль 2024 → декабрь 2024)</p>
+            <canvas id="chartConvRobosobaka" height="220"></canvas>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>SEO</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: рост органического трафика</p>
+
+          <div class="kv">
+            <div class="label">Цель</div>
+            <div class="value">
+              Увеличить органический трафик за год (май 2024 → апрель 2025).<br>
+              Май–июнь 2024 — SEO не было. С июля 2024 — SEO подключили.
+            </div>
+
+            <div class="label">Команда</div>
+            <div class="value">
+              In-house: junior интернет-маркетолог.<br>
+              Подрядчик: SEO-агентство.<br>
+              Курировал постановку задач, внедрения и контроль KPI.
+            </div>
+
+            <div class="label">Решение</div>
+            <div class="value">
+              <ul class="list">
+                <li>Организовал техаудит и план приоритетных доработок (индексация, структура, скорость).</li>
+                <li>Собрал кластеры запросов, подготовил ТЗ по структуре и контенту целевых страниц.</li>
+                <li>Внедрил on-page оптимизацию и перелинковку между разделами.</li>
+                <li>Настроил регулярный мониторинг и корректировки плана по динамике.</li>
+              </ul>
+            </div>
+
+            <div class="label">Результат</div>
+            <div class="value">Органический трафик вырос более чем в <strong>12 раз</strong> (по данным периода).</div>
+          </div>
+
+          <div class="chart-box">
+            <p class="chart-title">Органический трафик: динамика, % (май 2024 → апрель 2025)</p>
+            <canvas id="chartTrafficRobosobaka" height="220"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Контент-маркетинг</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: лиды через информационные статьи</p>
+
+          <div class="kv">
+            <div class="label">Задача</div>
+            <div class="value">Увеличить органический охват и конвертировать аудиторию в заявки через связку: статьи → коммерческие страницы → обращения.</div>
+
+            <div class="label">Команда</div>
+            <div class="value">
+              In-house: junior интернет-маркетолог.<br>
+              Подрядчик: SEO-агентство (контент-план и SEO-ТЗ).<br>
+              Курировал темы, постановку задач и публикации.
+            </div>
+
+            <div class="label">Решение</div>
+            <div class="value">
+              <ul class="list">
+                <li>Сформировал контент-план под вопросы целевой аудитории и кластеры запросов.</li>
+                <li>Организовал перелинковку статей на коммерческие страницы и формы обращения.</li>
+                <li>Вёл регулярный контроль результатов и корректировку тем по фактическому спросу.</li>
+              </ul>
+            </div>
+
+            <div class="label">Результат</div>
+            <div class="value">Информационные статьи обеспечили около <strong>6%</strong> от SEO-трафика и приносили в среднем <strong>~8 лидов в месяц</strong>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= PROJECT: CHILKOOT ================= -->
+  <div id="p-chilkoot" class="project-panel">
+
+    <div class="card">
+      <h2>О компании</h2>
+      <p class="muted"><strong>Chilkoot</strong> — оборудование для майнинга.</p>
+      <p class="muted" style="margin-top:10px;"><strong>Сайт:</strong> chilkoot.ru</p>
+    </div>
+
+    <div class="card">
+      <h2>Роль в проекте</h2>
+      <p class="muted">
+        In-house: маркетинг (со стороны клиента). Роль: <strong>junior интернет-маркетолог</strong>.<br>
+        Отвечал за performance и аналитику: постановка задач подрядчику, контроль KPI (CPL/лиды/качество),
+        регулярная отчётность, корректировки по результатам. Совместно с менеджерами продаж отслеживал качество обработки заявок.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Инструменты и аналитика</h2>
+      <p class="muted">
+        Яндекс Директ, Яндекс Метрика, Яндекс Вебмастер, Google Analytics, Google Search Console,
+        Figma, Power BI, Roistat
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Контекстная реклама</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: снижение CPL без потери лидов после смены подрядчика</p>
+
+          <div class="kv">
+            <div class="label">Цель</div>
+            <div class="value">
+              Снизить CPL и при этом не просесть по количеству лидов.<br>
+              Результаты работы Агентства 1 (янв–июл) перестали устраивать из-за высокой и нестабильной стоимости лида. В августе 2024 подрядчик был заменён на Агентство 2.
+            </div>
+
+            <div class="label">Команда</div>
+            <div class="value">In-house: junior интернет-маркетолог. Подрядчики: агентства 1 и 2 (контекстная реклама).</div>
+
+            <div class="label">Результат</div>
+            <div class="value">Стабилизация CPL и сохранение объёма лидов. Старт Агентства 2 отмечен на графиках.</div>
+          </div>
+
+          <div class="chart-box">
+            <p class="chart-title">CPL: динамика, ₽ (янв 2024 → дек 2024)</p>
+            <canvas id="chartCplChilkoot" height="220"></canvas>
+          </div>
+
+          <div class="chart-box">
+            <p class="chart-title">Количество лидов: динамика, шт (янв 2024 → дек 2024)</p>
+            <canvas id="chartLeadsChilkoot" height="220"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>SEO</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: рост органического трафика</p>
+
+          <div class="kv">
+            <div class="label">Цель</div>
+            <div class="value">
+              Увеличить органический трафик (май 2024 → апрель 2025). До июля 2024 — SEO не было. С июля 2024 — SEO подключили.
+            </div>
+
+            <div class="label">Команда</div>
+            <div class="value">
+              In-house: junior интернет-маркетолог.<br>
+              Подрядчик: SEO-агентство.<br>
+              Курировал постановку задач, внедрения и контроль KPI.
+            </div>
+
+            <div class="label">Результат</div>
+            <div class="value">Рост трафика — <strong>+534%</strong> (итог: ~в <strong>6,34 раза</strong> от стартовой точки).</div>
+          </div>
+
+          <div class="chart-box">
+            <p class="chart-title">Органический трафик: динамика, % (май 2024 → апрель 2025)</p>
+            <canvas id="chartTrafficChilkoot" height="220"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Контент-маркетинг</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: статьи → SEO-трафик → лиды</p>
+          <div class="kv">
+            <div class="label">Период</div>
+            <div class="value">Сентябрь 2025 — декабрь 2025</div>
+            <div class="label">Результат</div>
+            <div class="value">Доля трафика со статей — <strong>~12%</strong> от общего. В среднем — <strong>~13 лидов в месяц</strong>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Тайный покупатель</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: аудит процесса обработки лидов</p>
+          <div class="kv">
+            <div class="label">Период</div>
+            <div class="value">Сентябрь 2024</div>
+
+            <div class="label">Команда</div>
+            <div class="value">junior интернет-маркетолог</div>
+
+            <div class="label">Что проверяли</div>
+            <div class="value">
+              Путь клиента от первого обращения до получения КП: скорость реакции, качество консультации,
+              фиксация контакта, follow-up, соблюдение регламентов.
+            </div>
+
+            <div class="label">Итог</div>
+            <div class="value">
+              Проверка показала, что в <strong>~60% обращений</strong> были нарушения процесса, которые напрямую снижали вероятность сделки.
+            </div>
+
+            <div class="label">Найденные проблемы</div>
+            <div class="value">
+              <ul class="list">
+                <li>Долгая первичная обработка лидов и отсутствие гарантированного SLA.</li>
+                <li>Несвоевременная отправка КП и отсутствие повторного касания (follow-up).</li>
+                <li>Разный уровень консультации и нефиксируемые потребности клиента.</li>
+                <li>Потери лидов на этапе «обещали перезвонить / отправить КП — не сделали».</li>
+              </ul>
+            </div>
+
+            <div class="label">Что внедрили</div>
+            <div class="value">
+              <ul class="list">
+                <li>Рекомендовал зафиксировать SLA и шаблоны коммуникаций (первый контакт / КП / follow-up).</li>
+                <li>Настроить контроль статусов лидов и регулярный разбор потерь.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= PROJECT: RASKAT ================= -->
+  <div id="p-raskat" class="project-panel">
+
+    <div class="card">
+      <h2>О компании</h2>
+      <p class="muted">
+        <strong>Raskat</strong> – собственная торговая марка компании <strong>3Logic Group</strong>. Являясь лидером в дистрибьюции компьютерной техники и комплектующих, компания гарантирует качество продуктов и разумное ценообразование.
+      </p>
+      <p class="muted" style="margin-top:10px;"><strong>Сайт:</strong> raskat.ru</p>
+    </div>
+
+    <div class="card">
+      <h2>Роль в проекте</h2>
+      <p class="muted">
+        Выстроил SEO-направление: сформировал цели и KPI, подготовил план работ и приоритеты внедрений,
+        ставил задачи подрядчику и контролировал реализацию. Настроил регулярный мониторинг видимости и корректировку работ по результатам.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Инструменты и аналитика</h2>
+      <p class="muted">
+        Яндекс Директ, Яндекс Метрика, Яндекс Вебмастер, Google Analytics, Google Search Console,
+        Figma, Power BI, Roistat
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>SEO</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: рост поисковой видимости (ТОП-10)</p>
+
+          <div class="kv">
+            <div class="label">Цель</div>
+            <div class="value">
+              Рост видимости сайта в ТОП-10 в Яндекс и Google.<br>
+              До июля 2024 — SEO не было. С июля 2024 — SEO подключили.
+            </div>
+
+            <div class="label">Период</div>
+            <div class="value">Июль 2024 — декабрь 2024</div>
+
+            <!-- ✅ ДОБАВИЛИ КОМАНДУ -->
+            <div class="label">Команда</div>
+            <div class="value">
+              In-house: junior интернет-маркетолог.<br>
+              Подрядчик: SEO-агентство.<br>
+              Курировал план работ, внедрения и контроль KPI.
+            </div>
+
+            <div class="label">Результат</div>
+            <div class="value">
+              Существенный рост доли запросов в ТОП-10: к концу периода <strong>~30% в Яндекс</strong> и <strong>~50% в Google</strong>.
+            </div>
+          </div>
+
+          <div class="chart-box">
+            <p class="chart-title">Видимость ТОП-10 Яндекс: динамика, % (июль 2024 → декабрь 2024)</p>
+            <canvas id="chartRaskatYandex" height="220"></canvas>
+          </div>
+
+          <div class="chart-box">
+            <p class="chart-title">Видимость ТОП-10 Google: динамика, % (июль 2024 → декабрь 2024)</p>
+            <canvas id="chartRaskatGoogle" height="220"></canvas>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Контент-маркетинг</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: рост SEO-трафика через информационные статьи</p>
+
+          <div class="kv">
+            <div class="label">Задача</div>
+            <div class="value">
+              Расширить охват в поиске за счёт информационных запросов и передавать аудиторию на коммерческие страницы через перелинковку.
+            </div>
+
+            <div class="label">Период</div>
+            <div class="value">Сентябрь 2025 — декабрь 2025</div>
+
+            <div class="label">Команда</div>
+            <div class="value">
+              In-house: копирайтер.<br>
+              Подрядчик: SEO-агентство (контент-план и SEO-ТЗ).<br>
+              Курировал постановку задач и приемку материалов.
+            </div>
+
+            <div class="label">Решение</div>
+            <div class="value">
+              <ul class="list">
+                <li>Сформировал контент-план под кластеры спроса и приоритетные категории.</li>
+                <li>Настроил перелинковку «статья → категория/карточка/форма обращения».</li>
+                <li>Ввёл контроль тем по росту трафика и качеству переходов.</li>
+              </ul>
+            </div>
+
+            <div class="label">Результат</div>
+            <div class="value">
+              Информационные статьи дали около <strong>8%</strong> от SEO-трафика.
+              За счёт статей вырос охват в верхней части воронки и увеличилось число переходов на коммерческие страницы (через перелинковку).
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ================= PROJECT: CRUSADER ================= -->
+  <div id="p-crusader" class="project-panel">
+
+    <div class="card">
+      <h2>О компании</h2>
+      <p class="muted">
+        <strong>Crusader.ru</strong> — серверное оборудование и СХД (собственная торговая марка компании <strong>3Logic Group</strong>).
+      </p>
+      <p class="muted" style="margin-top:10px;"><strong>Сайт:</strong> crusader.ru</p>
+    </div>
+
+    <div class="card">
+      <h2>Роль в проекте</h2>
+      <p class="muted">
+        Выстроил SEO-направление: определил KPI и приоритетные кластеры запросов, подготовил план внедрений,
+        координировал подрядчика и внутренние работы. Контролировал динамику видимости и корректировал план по результатам.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Инструменты и аналитика</h2>
+      <p class="muted">
+        Яндекс Директ, Яндекс Метрика, Яндекс Вебмастер, Google Analytics, Google Search Console,
+        Figma, Power BI, Roistat
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>SEO</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: рост поисковой видимости (ТОП-10)</p>
+
+          <div class="kv">
+            <div class="label">Цель</div>
+            <div class="value">
+              Рост видимости сайта в ТОП-10 в Яндекс и Google.<br>
+              До июля 2024 — SEO не было. С июля 2024 — SEO подключили.
+            </div>
+
+            <div class="label">Период</div>
+            <div class="value">Июль 2024 — декабрь 2024</div>
+
+            <!-- ✅ ДОБАВИЛИ КОМАНДУ -->
+            <div class="label">Команда</div>
+            <div class="value">
+              In-house: junior интернет-маркетолог.<br>
+              Подрядчик: SEO-агентство.<br>
+              Курировал план работ, внедрения и контроль KPI.
+            </div>
+
+            <div class="label">Результат</div>
+            <div class="value">
+              К концу периода доля запросов в ТОП-10 достигла примерно <strong>~30% в Яндекс</strong> и <strong>~50% в Google</strong>.
+            </div>
+          </div>
+
+          <div class="chart-box">
+            <p class="chart-title">Видимость ТОП-10 Яндекс: динамика, % (июль 2024 → декабрь 2024)</p>
+            <canvas id="chartCrusaderYandex" height="220"></canvas>
+          </div>
+
+          <div class="chart-box">
+            <p class="chart-title">Видимость ТОП-10 Google: динамика, % (июль 2024 → декабрь 2024)</p>
+            <canvas id="chartCrusaderGoogle" height="220"></canvas>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Контент-маркетинг</h2>
+      <div class="case-grid">
+        <div class="case-item">
+          <p class="case-title">Кейс: рост SEO-трафика через информационные статьи</p>
+
+          <div class="kv">
+            <div class="label">Задача</div>
+            <div class="value">
+              Расширить охват по информационным запросам и передавать аудиторию на коммерческие страницы через перелинковку.
+            </div>
+
+            <div class="label">Период</div>
+            <div class="value">Сентябрь 2025 — декабрь 2025</div>
+
+            <div class="label">Команда</div>
+            <div class="value">
+              In-house: копирайтер.<br>
+              Подрядчик: SEO-агентство (контент-план и SEO-ТЗ).<br>
+              Курировал постановку задач и приемку материалов.
+            </div>
+
+            <div class="label">Решение</div>
+            <div class="value">
+              <ul class="list">
+                <li>Сформировал контент-план под спрос и приоритетные категории.</li>
+                <li>Настроил перелинковку «статья → коммерческий раздел → обращение».</li>
+                <li>Регулярно оценивал результаты и корректировал темы по динамике трафика.</li>
+              </ul>
+            </div>
+
+            <div class="label">Результат</div>
+            <div class="value">Информационные статьи обеспечили около <strong>6%</strong> от SEO-трафика.</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+/* =========================
+   Tabs
+========================= */
+function openProject(btn){
+  document.querySelectorAll('.tab').forEach(b=>{
+    b.classList.remove('active');
+    b.setAttribute('aria-selected','false');
+  });
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected','true');
+
+  document.querySelectorAll('.project-panel').forEach(p=>p.classList.remove('active'));
+  const id = btn.getAttribute('data-project');
+  const panel = document.getElementById(id);
+  if(panel) panel.classList.add('active');
+
+  requestAnimationFrame(()=> requestAnimationFrame(()=> redrawActiveCharts()));
+}
+
+function redrawActiveCharts(){
+  const active = document.querySelector('.project-panel.active');
+  if(!active) return;
+
+  if(active.id === 'p-3logic'){
+    drawTrafficChart3logic();
+  } else if(active.id === 'p-graviton'){
+    drawTrafficChartGraviton();
+    drawVisibilityYandexGraviton();
+    drawVisibilityGoogleGraviton();
+  } else if(active.id === 'p-robort'){
+    drawVisibilityYandexRobort();
+    drawVisibilityGoogleRobort();
+    drawLeadsRobort();
+  } else if(active.id === 'p-robosobaka'){
+    drawCplRobosobaka();
+    drawConvRobosobaka();
+    drawTrafficRobosobaka();
+  } else if(active.id === 'p-chilkoot'){
+    drawCplChilkoot();
+    drawLeadsChilkoot();
+    drawTrafficChilkoot();
+  } else if(active.id === 'p-raskat'){
+    drawRaskatYandex();
+    drawRaskatGoogle();
+  } else if(active.id === 'p-crusader'){
+    drawCrusaderYandex();
+    drawCrusaderGoogle();
+  }
+}
+
+/* =========================
+   Canvas helpers
+========================= */
+function getCanvasCssWidth(canvas){
+  const rect = canvas.getBoundingClientRect();
+  if(rect.width && rect.width > 0) return rect.width;
+  const parent = canvas.parentElement;
+  if(parent){
+    const prect = parent.getBoundingClientRect();
+    if(prect.width && prect.width > 0) return prect.width;
+  }
+  return 680;
+}
+
+function setupCanvas(canvas){
+  const cssW = Math.round(getCanvasCssWidth(canvas));
+  const cssH = canvas.getAttribute('height') ? Number(canvas.getAttribute('height')) : 220;
+  const dpr = window.devicePixelRatio || 1;
+
+  canvas.style.width = '100%';
+  canvas.width  = Math.round(cssW * dpr);
+  canvas.height = Math.round(cssH * dpr);
+  return { W: cssW, H: cssH, dpr };
+}
+
+function roundRect(ctx, x, y, w, h, r){
+  const rr = Math.min(r, w/2, h/2);
+  ctx.beginPath();
+  ctx.moveTo(x+rr, y);
+  ctx.arcTo(x+w, y, x+w, y+h, rr);
+  ctx.arcTo(x+w, y+h, x, y+h, rr);
+  ctx.arcTo(x, y+h, x, y, rr);
+  ctx.arcTo(x, y, x+w, y, rr);
+  ctx.closePath();
+}
+
+function drawValueLabel(ctx, text, x, y, opts){
+  const { index=0, plotTop=0, plotBottom=99999 } = (opts || {});
+  ctx.save();
+  ctx.font = '10px ui-sans-serif, system-ui, -apple-system, Segoe UI, Arial';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+
+  const padX = 5;
+  const w = ctx.measureText(text).width + padX*2;
+  const h = 14;
+
+  let dy = (index % 2 === 0) ? -18 : 18;
+  if (y + dy - h/2 < plotTop + 2) dy = 18;
+  if (y + dy + h/2 > plotBottom - 2) dy = -18;
+
+  const cx = x;
+  const cy = y + dy;
+
+  const cssW = ctx.canvas.width / (window.devicePixelRatio || 1);
+  const leftBound = 2 + w/2;
+  const rightBound = cssW - 2 - w/2;
+  const ccx = Math.max(leftBound, Math.min(rightBound, cx));
+
+  const bx = ccx - w/2;
+  const by = cy - h/2;
+
+  ctx.fillStyle = 'rgba(255,255,255,0.88)';
+  ctx.strokeStyle = '#e5e7eb';
+  ctx.lineWidth = 1;
+  roundRect(ctx, bx, by, w, h, 7);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.fillStyle = '#111827';
+  ctx.fillText(text, ccx, cy);
+  ctx.restore();
+}
+
+function drawAbsolutePercentChart(canvasId, labels, percentValues){
+  const canvas = document.getElementById(canvasId);
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const { W, H, dpr } = setupCanvas(canvas);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  const padL = 54, padR = 16, padT = 12, padB = 38;
+  const plotW = W - padL - padR;
+  const plotH = H - padT - padB;
+
+  const minV = Math.min(...percentValues);
+  const maxV = Math.max(...percentValues);
+  const top = Math.min(100, maxV + 5);
+  const bottom = Math.max(0, minV - 5);
+
+  const xAt = i => padL + plotW * (labels.length === 1 ? 0 : i/(labels.length-1));
+  const yAt = v => padT + plotH * (1 - (v - bottom) / (top - bottom || 1));
+
+  ctx.clearRect(0,0,W,H);
+
+  ctx.strokeStyle = '#e5e7eb';
+  ctx.lineWidth = 1;
+  for(let k=0;k<=4;k++){
+    const yy = padT + plotH*(k/4);
+    ctx.beginPath(); ctx.moveTo(padL, yy); ctx.lineTo(W-padR, yy); ctx.stroke();
+  }
+
+  ctx.fillStyle = '#6b7280';
+  ctx.font = '12px ui-sans-serif, system-ui, -apple-system, Segoe UI, Arial';
+  for(let k=0;k<=4;k++){
+    const v = top - (top-bottom)*(k/4);
+    ctx.fillText(Math.round(v) + '%', 8, (padT + plotH*(k/4)) + 4);
+  }
+
+  labels.forEach((lab,i)=>{
+    if(i % 2 !== 0 && i !== labels.length-1) return;
+    const xx = xAt(i);
+    const tw = ctx.measureText(lab).width;
+    ctx.fillText(lab, xx - tw/2, H - 12);
+  });
+
+  ctx.strokeStyle = '#0b3a82';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  percentValues.forEach((v,i)=>{
+    const px = xAt(i);
+    const py = yAt(v);
+    if(i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+  });
+  ctx.stroke();
+
+  percentValues.forEach((v,i)=>{
+    const px = xAt(i);
+    const py = yAt(v);
+
+    ctx.fillStyle = '#0b3a82';
+    ctx.beginPath(); ctx.arc(px, py, 3.8, 0, Math.PI*2); ctx.fill();
+    ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2; ctx.stroke();
+
+    const txt = (Math.round(v*100)/100).toFixed(2).replace('.', ',') + '%';
+    drawValueLabel(ctx, txt, px, py, { index: i, plotTop: padT, plotBottom: padT + plotH });
+  });
+}
+
+function drawAbsoluteNumberChart(canvasId, labels, values){
+  const canvas = document.getElementById(canvasId);
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const { W, H, dpr } = setupCanvas(canvas);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  const padL = 54, padR = 16, padT = 12, padB = 38;
+  const plotW = W - padL - padR;
+  const plotH = H - padT - padB;
+
+  const minV = Math.min(...values);
+  const maxV = Math.max(...values);
+  const span = Math.max(1, maxV - minV);
+  const top = maxV + span*0.18;
+  const bottom = Math.max(0, minV - span*0.18);
+
+  const xAt = i => padL + plotW * (labels.length === 1 ? 0 : i/(labels.length-1));
+  const yAt = v => padT + plotH * (1 - (v - bottom) / (top - bottom || 1));
+
+  ctx.clearRect(0,0,W,H);
+
+  ctx.strokeStyle = '#e5e7eb';
+  ctx.lineWidth = 1;
+  for(let k=0;k<=4;k++){
+    const yy = padT + plotH*(k/4);
+    ctx.beginPath(); ctx.moveTo(padL, yy); ctx.lineTo(W-padR, yy); ctx.stroke();
+  }
+
+  ctx.fillStyle = '#6b7280';
+  ctx.font = '12px ui-sans-serif, system-ui, -apple-system, Segoe UI, Arial';
+  for(let k=0;k<=4;k++){
+    const v = top - (top-bottom)*(k/4);
+    ctx.fillText(String(Math.round(v)), 8, (padT + plotH*(k/4)) + 4);
+  }
+
+  labels.forEach((lab,i)=>{
+    if(i % 2 !== 0 && i !== labels.length-1) return;
+    const xx = xAt(i);
+    const tw = ctx.measureText(lab).width;
+    ctx.fillText(lab, xx - tw/2, H - 12);
+  });
+
+  ctx.strokeStyle = '#0b3a82';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  values.forEach((v,i)=>{
+    const px = xAt(i);
+    const py = yAt(v);
+    if(i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+  });
+  ctx.stroke();
+
+  values.forEach((v,i)=>{
+    const px = xAt(i);
+    const py = yAt(v);
+
+    ctx.fillStyle = '#0b3a82';
+    ctx.beginPath(); ctx.arc(px, py, 3.8, 0, Math.PI*2); ctx.fill();
+    ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2; ctx.stroke();
+
+    drawValueLabel(ctx, String(v), px, py, { index: i, plotTop: padT, plotBottom: padT + plotH });
+  });
+}
+
+function drawRelativeLineChart(canvasId, labels, rawValues){
+  const canvas = document.getElementById(canvasId);
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const { W, H, dpr } = setupCanvas(canvas);
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+
+  const padL = 54, padR = 16, padT = 12, padB = 38;
+  const plotW = W - padL - padR;
+  const plotH = H - padT - padB;
+
+  const base = rawValues[0] || 1;
+  const series = rawValues.map(v => (v/base - 1) * 100);
+
+  const min = Math.min(...series);
+  const max = Math.max(...series);
+  const span = Math.max(1, max - min);
+  const top = max + span*0.18;
+  const bottom = min - span*0.18;
+
+  const xAt = i => padL + plotW * (labels.length === 1 ? 0 : i/(labels.length-1));
+  const yAt = v => padT + plotH * (1 - (v - bottom) / (top - bottom || 1));
+
+  ctx.clearRect(0,0,W,H);
+
+  ctx.strokeStyle = '#e5e7eb';
+  ctx.lineWidth = 1;
+  for(let k=0;k<=4;k++){
+    const yy = padT + plotH*(k/4);
+    ctx.beginPath(); ctx.moveTo(padL, yy); ctx.lineTo(W-padR, yy); ctx.stroke();
+  }
+
+  ctx.fillStyle = '#6b7280';
+  ctx.font = '12px ui-sans-serif, system-ui, -apple-system, Segoe UI, Arial';
+  for(let k=0;k<=4;k++){
+    const v = top - (top-bottom)*(k/4);
+    const label = (v >= 0 ? '+' : '') + Math.round(v) + '%';
+    ctx.fillText(label, 8, (padT + plotH*(k/4)) + 4);
+  }
+
+  labels.forEach((lab,i)=>{
+    if(i % 2 !== 0 && i !== labels.length-1) return;
+    const xx = xAt(i);
+    const tw = ctx.measureText(lab).width;
+    ctx.fillText(lab, xx - tw/2, H - 12);
+  });
+
+  ctx.strokeStyle = '#0b3a82';
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  series.forEach((v,i)=>{
+    const px = xAt(i);
+    const py = yAt(v);
+    if(i===0) ctx.moveTo(px,py); else ctx.lineTo(px,py);
+  });
+  ctx.stroke();
+
+  series.forEach((v,i)=>{
+    const px = xAt(i);
+    const py = yAt(v);
+
+    ctx.fillStyle = '#0b3a82';
+    ctx.beginPath(); ctx.arc(px, py, 3.8, 0, Math.PI*2); ctx.fill();
+    ctx.strokeStyle = '#ffffff'; ctx.lineWidth = 2; ctx.stroke();
+
+    const txt = (Math.round(v) >= 0 ? '+' : '') + Math.round(v) + '%';
+    drawValueLabel(ctx, txt, px, py, { index: i, plotTop: padT, plotBottom: padT + plotH });
+  });
+}
+
+/* =========================
+   Data
+========================= */
+function drawTrafficChart3logic(){
+  const labels = ['июл 24','авг 24','сен 24','окт 24','ноя 24','дек 24','янв 25','фев 25','мар 25','апр 25'];
+  const raw = [35679,38353,37226,44943,50765,57030,54671,57140,58419,54432];
+  drawRelativeLineChart('chartTraffic3logic', labels, raw);
+}
+
+function drawTrafficChartGraviton(){
+  const labels = ['окт 24','ноя 24','дек 24','янв 25','фев 25','мар 25','апр 25','май 25','июн 25','июл 25','авг 25','сен 25','окт 25','ноя 25','дек 25'];
+  const raw = [15123,15546,16815,15062,20080,21608,18965,15537,15347,17362,16344,18565,22117,17404,21448];
+  drawRelativeLineChart('chartTrafficGraviton', labels, raw);
+}
+
+function drawVisibilityYandexGraviton(){
+  const labels = ['ноя 24','дек 24','янв 25','фев 25','мар 25','апр 25','май 25','июн 25','июл 25','авг 25','сен 25','окт 25','ноя 25','дек 25'];
+  const values = [3.57,11.50,12.53,13.90,10.60,21.23,21.83,38.15,41.46,51.58,57.91,57.28,61.08,59.49];
+  drawAbsolutePercentChart('chartYandexGraviton', labels, values);
+}
+
+function drawVisibilityGoogleGraviton(){
+  const labels = ['ноя 24','дек 24','янв 25','фев 25','мар 25','апр 25','май 25','июн 25','июл 25','авг 25','сен 25','окт 25','ноя 25','дек 25'];
+  const values = [4.10,6.58,7.12,12.50,16.06,17.40,23.30,28.52,41.14,69.62,73.73,76.58,79.75,80.38];
+  drawAbsolutePercentChart('chartGoogleGraviton', labels, values);
+}
+
+function drawVisibilityYandexRobort(){
+  const labels = ['апр 25','май 25','июн 25','июл 25','авг 25','сен 25','окт 25','ноя 25','дек 25'];
+  const values = [6.12,24.41,36.40,40.81,56.51,58.89,59.31,50.54,64.82];
+  drawAbsolutePercentChart('chartYandexRobort', labels, values);
+}
+
+function drawVisibilityGoogleRobort(){
+  const labels = ['апр 25','май 25','июн 25','июл 25','авг 25','сен 25','окт 25','ноя 25','дек 25'];
+  const values = [3.58,8.10,13.24,19.85,29.37,32.76,58.10,70.89,80.36];
+  drawAbsolutePercentChart('chartGoogleRobort', labels, values);
+}
+
+function drawLeadsRobort(){
+  const labels = ['апр 25','май 25','июн 25','июл 25','авг 25','сен 25','окт 25','ноя 25','дек 25'];
+  const values = [8,12,18,16,24,32,40,34,65];
+  drawAbsoluteNumberChart('chartLeadsRobort', labels, values);
+}
+
+function drawTrafficRobosobaka(){
+  const labels = ['май 24','июн 24','июл 24','авг 24','сен 24','окт 24','ноя 24','дек 24','янв 25','фев 25','мар 25','апр 25'];
+  const raw = [958,1042,1231,1459,1692,1893,3034,4031,4236,5548,14646,12006];
+  drawRelativeLineChart('chartTrafficRobosobaka', labels, raw);
+}
+
+function drawCplRobosobaka(){
+  const labels = ['июл 24','авг 24','сен 24','окт 24','ноя 24','дек 24'];
+  const values = [13585,5906,3925,3838,5618,4611];
+  drawAbsoluteNumberChart('chartCplRobosobaka', labels, values);
+}
+
+function drawConvRobosobaka(){
+  const labels = ['июл 24','авг 24','сен 24','окт 24','ноя 24','дек 24'];
+  const values = [13,52,107,127,103,99];
+  drawAbsoluteNumberChart('chartConvRobosobaka', labels, values);
+}
+
+function drawCplChilkoot(){
+  const labels = ['янв 24','фев 24','мар 24','апр 24','май 24','июн 24','июл 24','авг 24','сен 24','окт 24','ноя 24','дек 24'];
+  const values = [29460,11280,8584,10977,12221,13962,9110,8564,7007,4254,3579,2422];
+  drawAbsoluteNumberChart('chartCplChilkoot', labels, values);
+}
+
+function drawLeadsChilkoot(){
+  const labels = ['янв 24','фев 24','мар 24','апр 24','май 24','июн 24','июл 24','авг 24','сен 24','окт 24','ноя 24','дек 24'];
+  const values = [12,23,50,55,41,62,109,100,103,51,59,86];
+  drawAbsoluteNumberChart('chartLeadsChilkoot', labels, values);
+}
+
+function drawTrafficChilkoot(){
+  const labels = ['май 24','июн 24','июл 24','авг 24','сен 24','окт 24','ноя 24','дек 24','янв 25','фев 25','мар 25','апр 25'];
+  const raw = [925,1196,1333,1623,1905,2474,4615,6297,8483,5237,5171,5869];
+  drawRelativeLineChart('chartTrafficChilkoot', labels, raw);
+}
+
+function drawRaskatYandex(){
+  const labels = ['июл 24','авг 24','сен 24','окт 24','ноя 24','дек 24'];
+  const values = [4.85, 7.62, 12.94, 17.33, 24.18, 30.12];
+  drawAbsolutePercentChart('chartRaskatYandex', labels, values);
+}
+function drawRaskatGoogle(){
+  const labels = ['июл 24','авг 24','сен 24','окт 24','ноя 24','дек 24'];
+  const values = [11.35, 18.22, 27.84, 34.91, 43.68, 50.74];
+  drawAbsolutePercentChart('chartRaskatGoogle', labels, values);
+}
+
+function drawCrusaderYandex(){
+  const labels = ['июл 24','авг 24','сен 24','окт 24','ноя 24','дек 24'];
+  const values = [6.42, 10.18, 13.06, 15.27, 21.14, 28.67];
+  drawAbsolutePercentChart('chartCrusaderYandex', labels, values);
+}
+function drawCrusaderGoogle(){
+  const labels = ['июл 24','авг 24','сен 24','окт 24','ноя 24','дек 24'];
+  const values = [8.95, 14.73, 22.41, 31.62, 40.88, 48.56];
+  drawAbsolutePercentChart('chartCrusaderGoogle', labels, values);
+}
+
+/* init */
+function safeInitDraw(){
+  requestAnimationFrame(()=> requestAnimationFrame(()=> redrawActiveCharts()));
+}
+document.addEventListener('DOMContentLoaded', safeInitDraw);
+window.addEventListener('resize', ()=>{ requestAnimationFrame(()=> requestAnimationFrame(()=> redrawActiveCharts())); });
+</script>
+
+</body>
+</html>
